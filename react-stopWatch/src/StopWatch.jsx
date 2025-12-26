@@ -1,4 +1,11 @@
+import { useState, useEffect, useRef } from "react";
+
 function StopWatch() {
+  const [isRunning, setIsRunning] = useState(false);
+  const [elapsedTime, setElapsedTime] = useState(0);
+  const intervalId = useRef(null);
+  const startTime = useRef(0);
+
   return (
     <>
       <div className="stop-watch-container">
