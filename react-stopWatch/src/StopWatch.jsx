@@ -3,23 +3,24 @@ import { useState, useEffect, useRef } from "react";
 function StopWatch() {
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
-  const intervalId = useRef(null);
-  const startTime = useRef(0);
+  const intervalIdRef = useRef(null);
+  const StartTimeRef = useRef(0);
 
   useEffect(() => {
-    intervalId.current = setInterval(() => {
-      setElapsedTime(Date.now() - startTime.current);
-    }, 10);
+    if (isRunning) {
+      intervalIdRef.current = setInterval(() => {
+        setElapsedTime(Date.now() - StartTimeRef.current);
+      }, 10);
+    }
 
     return () => {
-      clearInterval(intervalId.current);
+      clearInterval(intervalIdRef.current);
     };
   }, [isRunning]);
 
   function start() {
     setIsRunning(true);
-    startTime.current = Date.now() - elapsedTime;
-    console.log(startTime.current);
+    StartTimeRef.current = Date.now() - elapsedTime;
   }
 
   function stop() {
@@ -27,15 +28,26 @@ function StopWatch() {
   }
 
   function reset() {
-    setIsRunning(false);
     setElapsedTime(0);
+    setIsRunning(false);
   }
-  function displayTime() {}
+
+  function displayTime() {
+    let minutes = Math.floor((elapsedTime / 1000 / 60) % 60);
+    let seconds = Math.floor((elapsedTime / 1000) % 60);
+    let miliseconds = Math.floor((elapsedTime % 1000) / 10);
+
+    minutes = String(minutes).padStart(2, "0");
+    seconds = String(seconds).padStart(2, "0");
+    miliseconds = String(miliseconds).padStart(2, "0");
+
+    return `${minutes}:${seconds}:${miliseconds}`;
+  }
 
   return (
     <>
       <div className="stop-watch-container">
-        <p className="time">00:00:00</p>
+        <div className="time">{displayTime()}</div>
         <div className="controls">
           <button className="start-button" onClick={start}>
             Start
