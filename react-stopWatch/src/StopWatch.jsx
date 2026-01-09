@@ -20,9 +20,10 @@ function StopWatch() {
     }, 50);
   }
 
-  console.log(elapsedTime);
-
-  function stop() {}
+  function stop() {
+    clearInterval(intervalIdRef.current);
+    intervalIdRef.current = null;
+  }
 
   function reset() {}
 
