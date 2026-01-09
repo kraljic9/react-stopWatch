@@ -1,36 +1,20 @@
 import { useState, useEffect, useRef } from "react";
 
 function StopWatch() {
-  const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const intervalIdRef = useRef(null);
   const StartTimeRef = useRef(0);
+  let lapTimeArr = useState([]);
 
   useEffect(() => {
-    if (isRunning) {
-      intervalIdRef.current = setInterval(() => {
-        setElapsedTime(Date.now() - StartTimeRef.current);
-      }, 10);
-    }
+    return () => {};
+  }, []);
 
-    return () => {
-      clearInterval(intervalIdRef.current);
-    };
-  }, [isRunning]);
+  function start() {}
 
-  function start() {
-    setIsRunning(true);
-    StartTimeRef.current = Date.now() - elapsedTime;
-  }
+  function stop() {}
 
-  function stop() {
-    setIsRunning(false);
-  }
-
-  function reset() {
-    setElapsedTime(0);
-    setIsRunning(false);
-  }
+  function reset() {}
 
   function displayTime() {
     let minutes = Math.floor((elapsedTime / 1000 / 60) % 60);
@@ -57,6 +41,9 @@ function StopWatch() {
           </button>
           <button className="reset-button" onClick={reset}>
             Reset
+          </button>
+          <button className="reset-button" onClick={lapTime}>
+            Lap
           </button>
         </div>
       </div>
