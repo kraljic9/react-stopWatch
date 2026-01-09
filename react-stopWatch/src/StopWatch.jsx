@@ -4,7 +4,7 @@ function StopWatch() {
   const [elapsedTime, setElapsedTime] = useState(0);
   const intervalIdRef = useRef(null);
   const StartTimeRef = useRef(0);
-  let lapTimeArr = useState([]);
+  let [lapTimeArr, setLapTimeArr] = useState([]);
 
   useEffect(() => {
     return () => {};
@@ -25,7 +25,13 @@ function StopWatch() {
     intervalIdRef.current = null;
   }
 
-  function reset() {}
+  function reset() {
+    setElapsedTime(0);
+    StartTimeRef.current = 0;
+    clearInterval(intervalIdRef.current);
+    intervalIdRef.current = null;
+    setLapTimeArr([]);
+  }
 
   function displayTime() {
     let minutes = Math.floor((elapsedTime / 1000 / 60) % 60);
