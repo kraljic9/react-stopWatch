@@ -33,22 +33,20 @@ function StopWatch() {
     setLapTimeArr([]);
   }
 
-  function displayTime() {
-    let minutes = Math.floor((elapsedTime / 1000 / 60) % 60);
-    let seconds = Math.floor((elapsedTime / 1000) % 60);
-    let miliseconds = Math.floor((elapsedTime % 1000) / 10);
+  function displayTime(ms) {
+    let minutes = Math.floor((ms / 1000 / 60) % 60);
+    let seconds = Math.floor((ms / 1000) % 60);
+    let miliseconds = Math.floor((ms % 1000) / 10);
 
-    minutes = String(minutes).padStart(2, "0");
-    seconds = String(seconds).padStart(2, "0");
-    miliseconds = String(miliseconds).padStart(2, "0");
+    const format = (n) => String(n).padStart(2, "0");
 
-    return `${minutes}:${seconds}:${miliseconds}`;
+    return `${format(minutes)}:${format(seconds)}:${format(miliseconds)}`;
   }
 
   return (
     <>
       <div className="stop-watch-container">
-        <div className="time">{displayTime()}</div>
+        <div className="time">{displayTime(elapsedTime)}</div>
         <div className="controls">
           <button className="start-button" onClick={start}>
             Start
