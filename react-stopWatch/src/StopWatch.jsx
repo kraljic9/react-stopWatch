@@ -43,6 +43,10 @@ function StopWatch() {
     return `${format(minutes)}:${format(seconds)}:${format(miliseconds)}`;
   }
 
+  function lapTime() {
+    setLapTimeArr((prev) => [...prev, elapsedTime]);
+  }
+
   return (
     <>
       <div className="stop-watch-container">
@@ -57,8 +61,18 @@ function StopWatch() {
           <button className="reset-button" onClick={reset}>
             Reset
           </button>
-          <button className="reset-button">Lap</button>
+          <button className="lap-button" onClick={lapTime}>
+            Lap
+          </button>
         </div>
+      </div>
+
+      <div className="lap-time-container">
+        <ul className="lap-time-list">
+          {lapTimeArr.map((time, index) => (
+            <li key={index}>{displayTime(time)}</li>
+          ))}
+        </ul>
       </div>
     </>
   );
