@@ -10,7 +10,17 @@ function StopWatch() {
     return () => {};
   }, []);
 
-  function start() {}
+  function start() {
+    if (intervalIdRef.current) return;
+
+    StartTimeRef.current = Date.now() - elapsedTime;
+
+    intervalIdRef.current = setInterval(() => {
+      setElapsedTime(Date.now() - StartTimeRef.current);
+    }, 50);
+  }
+
+  console.log(elapsedTime);
 
   function stop() {}
 
@@ -42,9 +52,7 @@ function StopWatch() {
           <button className="reset-button" onClick={reset}>
             Reset
           </button>
-          <button className="reset-button" onClick={lapTime}>
-            Lap
-          </button>
+          <button className="reset-button">Lap</button>
         </div>
       </div>
     </>
