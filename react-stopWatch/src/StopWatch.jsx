@@ -68,11 +68,14 @@ function StopWatch() {
       </div>
 
       <div className="lap-time-container">
-        <ul className="lap-time-list">
+        <p className="lap-time-title">Lap Time Container</p>
+        <ol className="lap-time-list">
           {lapTimeArr.map((time, index) => (
-            <li key={index}>{displayTime(time)}</li>
+            <li key={index} className="lap-time-list-item">
+              {displayTime(time)}
+            </li>
           ))}
-        </ul>
+        </ol>
       </div>
     </>
   );
