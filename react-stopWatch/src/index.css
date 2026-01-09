@@ -11,7 +11,7 @@ body {
 .stop-watch-container {
   position: absolute;
   left: 50%;
-  top: 20%;
+  top: 5%;
   transform: translate(-50%);
   text-align: center;
   display: flex;
@@ -63,4 +63,12 @@ button {
 
 .reset-button:hover {
   background-color: hsl(205, 90%, 55%);
+}
+
+.lap-button {
+  background-color: hsl(0, 0%, 60%);
+}
+
+.lap-button:hover {
+  background-color: hsl(0, 0%, 55%);
 }
