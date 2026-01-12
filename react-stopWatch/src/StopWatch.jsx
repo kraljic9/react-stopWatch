@@ -55,7 +55,9 @@ function StopWatch() {
 
   return (
     <>
-      <button onClick={toggleTheme}>Toggle Theme</button>
+      <button className="toggle-theme-btn" onClick={toggleTheme}>
+        T
+      </button>
 
       <div className="stop-watch-container">
         <div className="time">{displayTime(elapsedTime)}</div>
