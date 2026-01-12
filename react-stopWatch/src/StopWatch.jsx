@@ -1,10 +1,16 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useEffect, useRef, useContext } from "react";
+import { ThemeContext } from "./ThemeContext";
 
 function StopWatch() {
   const [elapsedTime, setElapsedTime] = useState(0);
   const intervalIdRef = useRef(null);
   const StartTimeRef = useRef(0);
   let [lapTimeArr, setLapTimeArr] = useState([]);
+  const { theme, toggleTheme } = useContext(ThemeContext);
+
+  useEffect(() => {
+    document.body.classList = theme;
+  });
 
   useEffect(() => {
     return () => {};
@@ -49,6 +55,8 @@ function StopWatch() {
 
   return (
     <>
+      <button onClick={toggleTheme}>Toggle Theme</button>
+
       <div className="stop-watch-container">
         <div className="time">{displayTime(elapsedTime)}</div>
         <div className="controls">
