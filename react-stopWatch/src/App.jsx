@@ -1,10 +1,13 @@
 import "./App.css";
 import StopWatch from "./stopWatch";
+import ThemeProvider from "./ThemeProvider";
 
 function App() {
   return (
     <>
-      <StopWatch />
+      <ThemeProvider>
+        <StopWatch />
+      </ThemeProvider>
     </>
   );
 }
